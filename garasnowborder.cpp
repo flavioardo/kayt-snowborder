@@ -1,57 +1,65 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-srand(time(NULL));
+
 
 struct s_snow
 {
     int matricola;
     string cognome;
-    int x;
-    int y;
-}
+    int kmt;
+} snow, vet_snow[20];;
 
 int genera()
 {
-    int x1=0;
-    int y1=0;
+    srand(time(NULL));
+    int x1=0,y1=0,x=0,y=0,dist1=0,dist=0,giri=0;
+    giri=rand()%5+25;
     
-    for(int i=0; i<30; i++)
+    for(int i=0; i<giri; i++)
     {
         x=rand()%100;
         y=rand()%100;
-        calcola(x,y);
-        dist1=sqrt((pow(x,2)-pow(x1,2))+(pow(y,2)-pow(y1,2)))
+        dist1=sqrt((pow(x,2)-pow(x1,2))+(pow(y,2)-pow(y1,2)));
         x1=x;
         y1=y;
         dist=dist+dist1;
     }
+    
+    return dist;
 }
 
 void gara()
 {
-    string scelta="";
-    int c=1;
+    int n=0,dista=0;
     
-    do{
+    cout<<"Quanti partecipanti si vuole far gareggiare? "<<endl;
+    cin>>n;
     
-        cout<<"Inserire cognome partecipante: ";
-        //cin>>cognome;
-        cout<<"Vuole inserire un altro partecipante(si/no)";
-        //cin>>scelta;
+    for(int i=0; i<n; i++)
+    {
+        vet_snow[i].matricola=i+1;
+        
+        cout<<"Inserire cognome partecipante "<<i+1;
+        cin>>vet_snow[i].cognome;
+        
+        vet_snow[i].kmt=genera();
+    }
         
     
-    }while(scelta!="no");
+    
 }
 
 
 int main()
 {
     
+     
+    
     int scelta;
         do
         {
-            cout<<endl<<"MENU'"<<endl;
+            cout<<endl<<"===== MENU ====="<<endl;
             cout<<"1) Genera gara"<<endl;
             cout<<"2) Visualizza risultato"<<endl;
             cout<<"3)USCITA "<<endl;
