@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 
@@ -7,8 +9,10 @@ struct s_snow
 {
     int matricola;
     string cognome;
+    int x;
+    int y;
     int kmt;
-} snow, vet_snow[20];;
+} snow, vet_snow[20];
 
 int genera()
 {
@@ -16,8 +20,11 @@ int genera()
     int x1=0,y1=0,x=0,y=0,dist1=0,dist=0,giri=0;
     giri=rand()%5+25;
     
+  
     for(int i=0; i<giri; i++)
     {
+        //vet_snow[n].x[i]=x;
+        //vet_snow[n].y[i]=y;
         x=rand()%100;
         y=rand()%100;
         dist1=sqrt((pow(x,2)-pow(x1,2))+(pow(y,2)-pow(y1,2)));
@@ -25,31 +32,48 @@ int genera()
         y1=y;
         dist=dist+dist1;
     }
-    
+        
     return dist;
 }
 
-void gara()
+void carica_vet()
 {
-    int n=0,dista=0;
-    
-    cout<<"Quanti partecipanti si vuole far gareggiare? "<<endl;
-    cin>>n;
-    
-    for(int i=0; i<n; i++)
+    ifstream fin("gara.txt",ios::in);
+    string app;
+    while(!fin.eof())
     {
-        vet_snow[i].matricola=i+1;
-        
-        cout<<"Inserire cognome partecipante "<<i+1;
-        cin>>vet_snow[i].cognome;
-        
-        vet_snow[i].kmt=genera();
+        getline(fin,app);
+        for(int i=0; i<5; i++)
+        {
+            fin>>vet_snow[i].matricola>>vet_snow[i].cognome;
+        }
     }
-        
-    
-    
+    fin.close();
 }
 
+void leggi()
+{
+    carica_vet();
+    
+    cout<<"I partecipanti sono :"<<endl;
+    for(int i=0; i<5; i++)
+    {
+        cout<<vet_snow[i].matricola<<" "<<vet_snow[i].cognome<<" "<<endl;
+    }
+}
+
+void file_agg()
+{
+    ofstream fout("gara.txt");
+    
+    for(int i=0; i<5; i++)
+    {
+        fout<<endl<<vet_snow[i].matricola<<" "<<vet_snow[i].cognome;
+        
+    }
+    
+    fout.close();
+}
 
 int main()
 {
@@ -60,14 +84,14 @@ int main()
         do
         {
             cout<<endl<<"===== MENU ====="<<endl;
-            cout<<"1) Genera gara"<<endl;
-            cout<<"2) Visualizza risultato"<<endl;
+            cout<<"1) Visualizza partecipanti"<<endl;
+            cout<<"2) Genera gara e visualizza il risultato"<<endl;
             cout<<"3)USCITA "<<endl;
             cout<<"Inserire una scelta: "<<endl;
             cin>>scelta;
             switch(scelta){
                 case 1:
-                        gara();
+                        leggi();
                         break;
                     case 2:
                         
@@ -80,4 +104,3 @@ int main()
 
     return 0;
 }
-
