@@ -1,3 +1,12 @@
+/*!
+\file garasnowborder.cpp
+\brief implentazione di un programma che simuli una gara di Kayt-snowborder
+\author F.Ardolino
+\date 26/02/2023
+*/
+
+
+
 #include <iostream>
 #include <cmath>
 #include <iostream>
@@ -14,6 +23,9 @@ struct s_snow
     int kmt;
 } snow, vet_snow[20];
 
+/*! \fn carica_vet
+    \brief carica un vettore di struct con matricola e cognome dei partecipanti presenti nel file
+*/
 void carica_vet()
 {
     ifstream fin("gara.txt",ios::in);
@@ -29,6 +41,9 @@ void carica_vet()
     fin.close();
 }
 
+/*! \fn leggi
+    \brief lettura della matricola e del cognome dei partecipanti presenti nel vettore di struct
+*/
 void leggi()
 {
     carica_vet();
@@ -40,9 +55,12 @@ void leggi()
     }
 }
 
+/*! \fn leggi_agg
+    \brief lettura della matricola, del cognome e delle coordinate compiute dai partecipanti presenti nel vettore di struct
+    \param[in] numeri di giri che i partecipanti eseguono
+*/
 void leggi_agg(int giri)
 {
-    //carica_vet();
     
     cout<<"La gara e' :"<<endl;
     for(int i=0; i<5; i++)
@@ -56,16 +74,17 @@ void leggi_agg(int giri)
     }
 }
 
+/*! \fn pulisci
+    \brief azzeramento della gara precedente e scrittura nel file di solo matricola e cognome dei partecipanti
+*/
+
 void pulisci()
 {
     ofstream file("gara.txt");
     if (file.is_open())
     {
         file.clear();
-        //file.close();
     }
-    
-    //ofstream fout("gara.txt");
     
     for(int i=0; i<5; i++)
     {
@@ -75,6 +94,9 @@ void pulisci()
     file.close();
 }
 
+/*! \fn file_agg
+    \brief generazione delle coordinate dei partecipanti
+*/
 
 void file_agg()
 {
@@ -110,6 +132,10 @@ void file_agg()
     
     fout.close();
 }
+
+/*! \fn podio
+    \brief classificazione dei partecipanti in base alla distanza percorsa
+*/
 
 void podio()
 {
@@ -170,6 +196,10 @@ void podio()
     pulisci();
     
 }
+
+/*! \fn main
+    \brief menu' del programma che va a richiamare le funzioni in base alle scelte dell'utente
+*/
 
 int main()
 {
