@@ -13,6 +13,11 @@
 #include <fstream>
 using namespace std;
 
+/*!
+    \struct s_snowù
+    \brief struttura contenente matricola, cognome, coordinate e distanza percorsa dei partecipanti
+        
+*/
 
 struct s_snow
 {
@@ -53,6 +58,10 @@ void leggi()
     {
         cout<<endl<<vet_snow[i].matricola<<" "<<vet_snow[i].cognome<<" ";
     }
+    
+    cout<<endl;
+    
+    
 }
 
 /*! \fn leggi_agg
@@ -71,6 +80,8 @@ void leggi_agg(int giri)
         {
             cout<<"("<<vet_snow[i].x[j]<<";"<<vet_snow[i].y[j]<<") ";
         }
+        
+        cout<<endl;
     }
 }
 
@@ -109,14 +120,16 @@ void file_agg()
     {
         fout<<endl<<vet_snow[i].matricola<<" "<<vet_snow[i].cognome<<" ";
         giri=rand()%5+25;
+        dist=0;
+        
         for(int j=0; j<giri; j++)
         {
-            vet_snow[i].x[j]=x;
-            fout<<vet_snow[i].x[j]<<" ";
-            vet_snow[i].y[j]=y;
-            fout<<vet_snow[i].y[j]<<" ";
             x=rand()%101;
             y=rand()%101;
+            vet_snow[i].x[j]=x;
+            fout<< "("<<vet_snow[i].x[j]<<";";
+            vet_snow[i].y[j]=y;
+            fout<<vet_snow[i].y[j]<<")";
             dist1=sqrt((pow(x-x1,2))+(pow(y-y1,2)));
             x1=x;
             y1=y;
@@ -153,7 +166,7 @@ void podio()
         }
     }
     
-    cout<<endl<<"Primo: "<<vet_snow[a].matricola<<" "<<vet_snow[a].cognome<<" Distanza percorsa: "<<vet_snow[a].kmt;
+    cout<<endl<<"Primo: "<<vet_snow[a].matricola<<" "<<vet_snow[a].cognome<<" con "<<vet_snow[a].kmt;
     
     for(int i=0; i<5; i++)
     {
@@ -172,7 +185,7 @@ void podio()
         }
     }
     
-    cout<<endl<<"Secondo: "<<vet_snow[b].matricola<<" "<<vet_snow[b].cognome<<" Distanza percorsa: "<<vet_snow[b].kmt;
+    cout<<endl<<"Secondo: "<<vet_snow[b].matricola<<" "<<vet_snow[b].cognome<<" con "<<vet_snow[b].kmt;
     
     for(int i=0; i<5; i++)
     {
@@ -191,7 +204,9 @@ void podio()
         }
     }
     
-    cout<<endl<<"Terzo: "<<vet_snow[c].matricola<<" "<<vet_snow[c].cognome<<" Distanza percorsa: "<<vet_snow[c].kmt;
+    cout<<endl<<"Terzo: "<<vet_snow[c].matricola<<" "<<vet_snow[c].cognome<<" con "<<vet_snow[c].kmt;
+    
+    cout<<endl;
     
     pulisci();
     
